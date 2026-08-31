@@ -1,0 +1,18 @@
+{
+    "menu": [
+        {
+            "name": "Vanilla Rose",
+            "price": "15,99"
+        },
+        {
+            "name": "Velvet Cake",
+            "price": "12,50"
+        }
+    ],
+    "valentines": [
+        {
+            "name": "Valentine Rose",
+            "price": "25,14"
+        }
+    ]
+}
