@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Challenge: Mad Libs</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            padding: 40px;
+            max-width: 600px;
+            width: 100%;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        label {
+            font-weight: bold;
+            color: #555;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"] {
+            padding: 10px 15px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+            transition: border-color 0.3s ease;
+        }
+
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        button {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 5px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        #lib-button {
+            background-color: #667eea;
+            color: white;
+            flex: 1;
+        }
+
+        #shuffle-button {
+            background-color: #28a745;
+            color: white;
+            flex: 1;
+            display: none;
+        }
+
+        .story-container {
+            background-color: #f9f9f9;
+            border-left: 4px solid #667eea;
+            padding: 20px;
+            border-radius: 5px;
+            line-height: 1.8;
+        }
+
+        .story-label {
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        #story {
+            color: #555;
+            font-size: 16px;
+            font-style: italic;
+        }
+
+        .error {
+            color: #dc3545;
+            text-align: center;
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #f8d7da;
+            border-radius: 5px;
+            display: none;
+        }
+
+        .error.show {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎭 Mad Libs Game</h1>
+
+        <form id="libform">
+            <div>
+                <label for="noun">Noun:</label>
+                <input type="text" id="noun" placeholder="e.g., dragon, pizza, robot">
+            </div>
+            <div>
+                <label for="adjective">Adjective:</label>
+                <input type="text" id="adjective" placeholder="e.g., silly, giant, sparkly">
+            </div>
+            <div>
+                <label for="person">Someone's Name:</label>
+                <input type="text" id="person" placeholder="e.g., John, Alice">
+            </div>
+            <div>
+                <label for="verb">Verb:</label>
+                <input type="text" id="verb" placeholder="e.g., jump, dance, eat">
+            </div>
+            <div>
+                <label for="place">A Place:</label>
+                <input type="text" id="place" placeholder="e.g., library, moon, pizza shop">
+            </div>
+            <div class="button-group">
+                <button type="submit" id="lib-button">Lib it!</button>
+                <button type="button" id="shuffle-button">Shuffle Story</button>
+            </div>
+        </form>
+
+        <div class="error" id="error-message"></div>
+
+        <div class="story-container" id="story-container" style="display: none;">
+            <div class="story-label">📖 Generated Story:</div>
+            <p id="story"></p>
+        </div>
+    </div>
+
+    <script src="daily challenge tell the story.js"></script>
+</body>
+</html>
