@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drum Room</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <main class="drum-room">
+        <header class="header">
+            <p class="eyebrow">Browser beat lab</p>
+            <h1>Drum Room</h1>
+            <p class="subtitle">Tap the kit or use your keyboard to make a beat.</p>
+        </header>
+
+        <section class="kit" aria-label="Drum kit">
+            <button class="drum kick" data-key="a" data-sound="kick" type="button">
+                <span class="key">A</span><span class="name">Kick</span>
+            </button>
+            <button class="drum snare" data-key="s" data-sound="snare" type="button">
+                <span class="key">S</span><span class="name">Snare</span>
+            </button>
+            <button class="drum clap" data-key="d" data-sound="clap" type="button">
+                <span class="key">D</span><span class="name">Clap</span>
+            </button>
+            <button class="drum hat" data-key="f" data-sound="hat" type="button">
+                <span class="key">F</span><span class="name">Hi-hat</span>
+            </button>
+            <button class="drum tom" data-key="g" data-sound="tom" type="button">
+                <span class="key">G</span><span class="name">Tom</span>
+            </button>
+            <button class="drum crash" data-key="h" data-sound="crash" type="button">
+                <span class="key">H</span><span class="name">Crash</span>
+            </button>
+        </section>
+
+        <footer class="status" id="status" aria-live="polite">Ready to play</footer>
+    </main>
+</body>
+</html>
