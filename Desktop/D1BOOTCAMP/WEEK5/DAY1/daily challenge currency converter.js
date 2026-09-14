@@ -1,4 +1,5 @@
 const apiKeyInput = document.querySelector('#api-key');
+const loadCurrenciesButton = document.querySelector('#load-currencies');
 const amountInput = document.querySelector('#amount');
 const fromCurrency = document.querySelector('#from-currency');
 const toCurrency = document.querySelector('#to-currency');
@@ -6,6 +7,7 @@ const converterForm = document.querySelector('#converter-form');
 const switchButton = document.querySelector('#switch-currencies');
 const result = document.querySelector('#result');
 const status = document.querySelector('#status');
+let supportedCurrencies = new Set();
 
 const setStatus = (message, type = '') => {
 	status.className = `status ${type}`;
@@ -13,7 +15,10 @@ const setStatus = (message, type = '') => {
 };
 
 const setCurrencyOptions = (codes) => {
-	const options = codes
+	const validCodes = [...new Set(codes.map((code) => code.toUpperCase()))]
+		.filter((code) => /^[A-Z]{3}$/.test(code));
+	supportedCurrencies = new Set(validCodes);
+	const options = validCodes
 		.sort()
 		.map((code) => `<option value="${code}">${code}</option>`)
 		.join('');
@@ -22,9 +27,20 @@ const setCurrencyOptions = (codes) => {
 	toCurrency.innerHTML = options;
 	fromCurrency.value = 'USD';
 	toCurrency.value = 'EUR';
+	fromCurrency.disabled = false;
+	toCurrency.disabled = false;
+	switchButton.disabled = false;
 };
 
 const fetchSupportedCurrencies = async (apiKey) => {
+	if (!apiKey) {
+		const response = await fetch('https://open.er-api.com/v6/latest/USD');
+		const data = await response.json();
+		if (!response.ok || data.result !== 'success') throw new Error('Public currency feed unavailable');
+		setCurrencyOptions(Object.keys(data.rates));
+		return;
+	}
+
 	const response = await fetch(`https://v6.exchangerate-api.com/v6/${apiKey}/codes`);
 	const data = await response.json();
 
@@ -36,6 +52,15 @@ const fetchSupportedCurrencies = async (apiKey) => {
 };
 
 const fetchConversion = async (apiKey, from, to, amount) => {
+	if (!apiKey) {
+		const response = await fetch(`https://open.er-api.com/v6/latest/${from}`);
+		const data = await response.json();
+		if (!response.ok || data.result !== 'success' || !data.rates[to]) {
+			throw new Error('Public conversion feed unavailable');
+		}
+		return { conversion_rate: data.rates[to], conversion_result: amount * data.rates[to] };
+	}
+
 	const response = await fetch(`https://v6.exchangerate-api.com/v6/${apiKey}/pair/${from}/${to}/${amount}`);
 	const data = await response.json();
 
@@ -48,15 +73,10 @@ const fetchConversion = async (apiKey, from, to, amount) => {
 
 const loadCurrencies = async () => {
 	const apiKey = apiKeyInput.value.trim();
-	if (!apiKey) {
-		setStatus('Enter your ExchangeRate API key to load currencies.', 'error');
-		return;
-	}
-
 	setStatus('Loading supported currencies...', 'loading');
 	try {
 		await fetchSupportedCurrencies(apiKey);
-		setStatus('Currencies ready.');
+		setStatus(apiKey ? 'Currencies ready from your API key.' : 'Currencies ready from the public feed.', 'success');
 	} catch (error) {
 		setStatus(`Unable to load currencies: ${error.message}.`, 'error');
 	}
@@ -66,9 +86,16 @@ converterForm.addEventListener('submit', async (event) => {
 	event.preventDefault();
 	const apiKey = apiKeyInput.value.trim();
 	const amount = Number(amountInput.value);
+	const from = fromCurrency.value.toUpperCase();
+	const to = toCurrency.value.toUpperCase();
 
-	if (!apiKey || !amount || amount < 0) {
-		setStatus('Add a valid API key and amount first.', 'error');
+	if (!amount || amount < 0) {
+		setStatus('Add a valid amount first.', 'error');
+		return;
+	}
+
+	if (!supportedCurrencies.has(from) || !supportedCurrencies.has(to)) {
+		setStatus('Choose two supported modern currencies.', 'error');
 		return;
 	}
 
@@ -76,9 +103,9 @@ converterForm.addEventListener('submit', async (event) => {
 	result.textContent = '...';
 
 	try {
-		const data = await fetchConversion(apiKey, fromCurrency.value, toCurrency.value, amount);
-		result.textContent = `${data.conversion_result.toLocaleString(undefined, { maximumFractionDigits: 2 })} ${toCurrency.value}`;
-		setStatus(`1 ${fromCurrency.value} = ${data.conversion_rate} ${toCurrency.value}`, 'success');
+		const data = await fetchConversion(apiKey, from, to, amount);
+		result.textContent = `${data.conversion_result.toLocaleString(undefined, { maximumFractionDigits: 2 })} ${to}`;
+		setStatus(`1 ${from} = ${data.conversion_rate} ${to}`, 'success');
 	} catch (error) {
 		result.textContent = '—';
 		setStatus(`Conversion failed: ${error.message}.`, 'error');
@@ -93,3 +120,5 @@ switchButton.addEventListener('click', () => {
 });
 
 apiKeyInput.addEventListener('change', loadCurrencies);
+loadCurrenciesButton.addEventListener('click', loadCurrencies);
+loadCurrencies();
