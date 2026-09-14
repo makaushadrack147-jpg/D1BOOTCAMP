@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Currency Converter</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <link rel="stylesheet" href="daily challenge currency converter.css">
+</head>
+<body>
+    <main class="converter-app">
+        <header><span class="eyebrow">PERSONAL FINANCE / LIVE RATES</span><span class="mark">↗</span></header>
+        <section class="intro">
+            <p class="kicker">Global exchange desk</p>
+            <h1>Move money<br><em>without borders.</em></h1>
+            <p>Get the latest exchange rate for more than 160 currencies.</p>
+        </section>
+
+        <section class="converter-panel">
+            <div class="key-row">
+                <label for="api-key">ExchangeRate API key</label>
+                <input id="api-key" type="password" autocomplete="off" placeholder="Paste your key to begin">
+            </div>
+            <form id="converter-form">
+                <label for="amount">Amount</label>
+                <input id="amount" type="number" min="0" step="any" value="100" required>
+                <div class="currency-row">
+                    <div><label for="from-currency">From</label><select id="from-currency"><option>Load currencies</option></select></div>
+                    <button id="switch-currencies" class="switch" type="button" aria-label="Switch currencies"><i class="fa-solid fa-arrow-right-arrow-left"></i></button>
+                    <div><label for="to-currency">To</label><select id="to-currency"><option>Load currencies</option></select></div>
+                </div>
+                <button class="convert" type="submit"><i class="fa-solid fa-wand-magic-sparkles"></i> Convert amount</button>
+            </form>
+            <div class="answer"><span>Converted amount</span><strong id="result">—</strong></div>
+            <p id="status" class="status" aria-live="polite">Enter your API key to load currencies.</p>
+        </section>
+        <footer><span>EXCHANGERATE-API</span><span>UPDATED ON REQUEST</span></footer>
+    </main>
+    <script src="daily challenge currency converter.js"></script>
+</body>
+</html>
