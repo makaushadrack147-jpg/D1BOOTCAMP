@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Random Quote Generator</title>
+</head>
+<body>
+  <main>
+    <h1>Random Quote Generator</h1>
+
+    <section id="quote-display" aria-live="polite">
+      <blockquote id="quote-text"></blockquote>
+      <p id="quote-author"></p>
+      <p id="quote-stats"></p>
+    </section>
+
+    <button id="generate-quote" type="button">Generate Quote</button>
+
+    <section aria-labelledby="add-quote-heading">
+      <h2 id="add-quote-heading">Add a Quote</h2>
+      <form id="quote-form">
+        <label for="quote-input">Quote</label>
+        <textarea id="quote-input" name="quote" required></textarea>
+
+        <label for="author-input">Author</label>
+        <input id="author-input" name="author" type="text" required>
+
+        <button type="submit">Add Quote</button>
+      </form>
+    </section>
+
+    <section aria-labelledby="quote-tools-heading">
+      <h2 id="quote-tools-heading">Quote Tools</h2>
+      <button id="characters-with-spaces" type="button">Characters with spaces</button>
+      <button id="characters-without-spaces" type="button">Characters without spaces</button>
+      <button id="word-count" type="button">Word count</button>
+      <button id="like-quote" type="button">Like</button>
+    </section>
+
+    <section aria-labelledby="filter-heading">
+      <h2 id="filter-heading">Filter by Author</h2>
+      <form id="filter-form">
+        <label for="filter-author">Author</label>
+        <input id="filter-author" name="author" type="text" required>
+        <button type="submit">Find Quotes</button>
+      </form>
+      <p id="filter-status" aria-live="polite"></p>
+      <button id="previous-quote" type="button" disabled>Previous</button>
+      <button id="next-quote" type="button" disabled>Next</button>
+    </section>
+  </main>
+
+  <script src="mini project random quote generator.js"></script>
+</body>
+</html>

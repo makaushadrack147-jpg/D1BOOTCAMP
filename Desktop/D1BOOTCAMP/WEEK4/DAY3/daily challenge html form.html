@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Form JSON Output</title>
+</head>
+<body>
+	<h1>Submit Your Details</h1>
+
+	<form id="user-form">
+		<label for="name">Name</label>
+		<input id="name" name="name" type="text" required>
+
+		<label for="last-name">Last name</label>
+		<input id="last-name" name="lastName" type="text" required>
+
+		<button type="submit">Send</button>
+	</form>
+
+	<section id="json-output" aria-live="polite"></section>
+
+	<script>
+		const userForm = document.querySelector('#user-form');
+		const jsonOutput = document.querySelector('#json-output');
+
+		userForm.addEventListener('submit', (event) => {
+			event.preventDefault();
+
+			const formData = new FormData(userForm);
+			const user = {
+				name: formData.get('name'),
+				lastName: formData.get('lastName')
+			};
+
+			const output = document.createElement('pre');
+			output.textContent = JSON.stringify(user);
+			jsonOutput.appendChild(output);
+			userForm.reset();
+		});
+	</script>
+</body>
+</html>

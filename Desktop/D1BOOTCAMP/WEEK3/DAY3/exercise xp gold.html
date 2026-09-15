@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercise XP Gold</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        article {
+            margin-bottom: 40px;
+            border: 1px solid #ccc;
+            padding: 20px;
+            border-radius: 5px;
+        }
+        h2 {
+            color: #333;
+        }
+        form {
+            margin: 15px 0;
+            padding: 15px;
+            background-color: #f5f5f5;
+            border-radius: 5px;
+        }
+        select, input[type="text"], input[type="button"], input[type="submit"] {
+            padding: 8px;
+            margin: 5px 0;
+            font-size: 14px;
+        }
+        #shoppingListContainer {
+            margin-top: 20px;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            padding: 8px;
+            background-color: #e8f4f8;
+            margin: 5px 0;
+            border-radius: 3px;
+        }
+        .result {
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #ffffcc;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Exercise 1: Select a kind of Music -->
+    <article>
+        <h2>Exercise 1: Select a kind of Music</h2>
+        <select id="genres">
+            <option value="rock">Rock</option>
+            <option value="blues" selected>Blues</option>
+            <option value="classic">Classic</option>
+        </select>
+        <div class="result">
+            <p>Selected Value: <strong id="selectedGenre">Blues</strong></p>
+        </div>
+    </article>
+
+    <!-- Exercise 2: Delete colors -->
+    <article>
+        <h2>Exercise 2: Delete colors</h2>
+        <form id="colorForm">
+            <select id="colorSelect">
+                <option>Red</option>
+                <option>Green</option>
+                <option>White</option>
+                <option>Black</option>
+            </select>
+            <input type="button" value="Select and Remove">
+        </form>
+    </article>
+
+    <!-- Exercise 3: Create a shopping list -->
+    <article>
+        <h2>Exercise 3: Create a shopping list</h2>
+        <div id="root"></div>
+    </article>
+
+    <script src="exercise xp gold.js"></script>
+</body>
+</html>
