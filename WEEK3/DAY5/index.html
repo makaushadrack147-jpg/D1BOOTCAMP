@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coloring Squares</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="mini project coloring game.js" defer></script>
+</head>
+<body>
+    <main class="app-shell">
+        <header class="app-header">
+            <div>
+                <p class="eyebrow">Creative canvas</p>
+                <h1>Coloring Squares</h1>
+                <p class="intro">Choose a color, then paint your own pixel artwork.</p>
+            </div>
+            <button class="clear-button" id="clear-button" type="button">
+                <span aria-hidden="true">&#8635;</span>
+                Clear canvas
+            </button>
+        </header>
+
+        <section class="workspace" aria-label="Coloring game">
+            <aside class="palette-panel">
+                <div class="panel-heading">
+                    <h2>Palette</h2>
+                    <span class="color-preview" id="color-preview" aria-hidden="true"></span>
+                </div>
+                <div class="palette" id="palette" role="radiogroup" aria-label="Choose a color"></div>
+                <p class="selection-status" id="selection-status" aria-live="polite">Selected: Coral</p>
+            </aside>
+
+            <section class="canvas-panel">
+                <div class="canvas-heading">
+                    <div>
+                        <h2>Your canvas</h2>
+                        <p id="paint-count">0 squares painted</p>
+                    </div>
+                    <span class="canvas-size">24 x 18</span>
+                </div>
+                <div class="pixel-canvas" id="pixel-canvas" role="grid" aria-label="Drawing canvas"></div>
+            </section>
+        </section>
+    </main>
+</body>
+</html>

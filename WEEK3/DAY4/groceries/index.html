@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Groceries Challenge</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <main class="page">
+        <header class="header">
+            <p class="eyebrow">Day 4 JavaScript</p>
+            <h1>Groceries</h1>
+            <p class="intro">Explore object properties, arrays, and references.</p>
+        </header>
+
+        <section class="dashboard" aria-label="Groceries challenge">
+            <div class="section-heading">
+                <div>
+                    <p class="label">Fruit basket</p>
+                    <h2>What is on the list?</h2>
+                </div>
+                <span class="fruit-count" id="fruit-count">0 fruits</span>
+            </div>
+            <ul class="fruit-list" id="fruit-list"></ul>
+
+            <div class="divider"></div>
+
+            <div class="section-heading">
+                <div>
+                    <p class="label">Object reference</p>
+                    <h2>Clone the groceries</h2>
+                </div>
+                <button id="clone-button" type="button">Run example</button>
+            </div>
+            <p class="hint">Change the shopping object and see how the original object changes too.</p>
+            <div class="result-grid">
+                <article class="result-card">
+                    <span class="card-label">groceries</span>
+                    <pre id="groceries-output">Run the example to see the object.</pre>
+                </article>
+                <article class="result-card accent-card">
+                    <span class="card-label">shopping</span>
+                    <pre id="shopping-output">Run the example to see the object.</pre>
+                </article>
+            </div>
+            <p class="lesson" id="lesson" aria-live="polite">The two variables will point to the same object.</p>
+        </section>
+    </main>
+</body>
+</html>
