@@ -70,3 +70,6 @@ WHERE ft.id NOT IN (
 	FROM SecondTab
 	WHERE id IS NOT NULL
 );
+
+
+

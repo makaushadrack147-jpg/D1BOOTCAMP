@@ -265,5 +265,3 @@ ALTER TABLE ONLY public.items
 --
 
 \unrestrict beWug1meZsOdKjcy6yH24FJPVuc7ak4i58tpxqwKvZ0qjCgEDRI1hbZzDdOcQuT
-\unrestrict beWug1meZsOdKjcy6yH24FJPVuc7ak4i58tpxqwKvZ0qjCgEDRI1hbZzDdOcQuT
-
