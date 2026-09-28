@@ -1,0 +1,312 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f4f7f0">
+    <title>Emoji Pop Quiz</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+      :root {
+        color-scheme: light;
+        --ink: #173b34;
+        --muted: #64766f;
+        --paper: #f4f7f0;
+        --white: #fffefa;
+        --green: #c9f05d;
+        --orange: #ff765e;
+        --line: #dce5d9;
+        font-family: "Outfit", sans-serif;
+      }
+
+      * { box-sizing: border-box; }
+      body {
+        min-width: 320px;
+        min-height: 100vh;
+        margin: 0;
+        color: var(--ink);
+        background-color: var(--paper);
+        background-image: radial-gradient(#cbd7c6 0.7px, transparent 0.7px);
+        background-size: 20px 20px;
+      }
+      button, input { font: inherit; }
+      button { color: inherit; }
+      .shell { width: min(1040px, calc(100% - 40px)); margin: 0 auto; }
+      header {
+        min-height: 82px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-bottom: 1px solid var(--line);
+      }
+      .brand { display: flex; align-items: center; gap: 11px; font-size: 18px; font-weight: 800; }
+      .brand-mark {
+        display: grid;
+        width: 38px;
+        height: 38px;
+        place-items: center;
+        border: 1px solid var(--ink);
+        border-radius: 12px;
+        background: var(--green);
+        font-size: 21px;
+        transform: rotate(-5deg);
+      }
+      .tagline { color: var(--muted); font-family: "DM Mono", monospace; font-size: 11px; }
+      main { padding: 54px 0 72px; }
+      .intro { margin-bottom: 30px; animation: rise 450ms ease-out both; }
+      .eyebrow { color: #527363; font: 500 11px "DM Mono", monospace; letter-spacing: 0; text-transform: uppercase; }
+      h1 { margin: 10px 0 0; font-size: clamp(34px, 6vw, 56px); line-height: 1; letter-spacing: 0; }
+      h1 span { color: #e76c52; }
+      .layout { display: grid; grid-template-columns: minmax(0, 1fr) 270px; gap: 22px; align-items: start; }
+      .game { padding: 26px; border: 1px solid var(--line); border-radius: 8px; background: var(--white); animation: rise 500ms 70ms ease-out both; }
+      .stats { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+      .player-label { display: flex; align-items: center; gap: 9px; color: var(--muted); font-size: 13px; }
+      .player-label input {
+        width: 132px;
+        padding: 8px 10px;
+        border: 1px solid var(--line);
+        border-radius: 5px;
+        outline: none;
+        background: #fff;
+        color: var(--ink);
+      }
+      .player-label input:focus { border-color: #668d69; box-shadow: 0 0 0 3px #668d6922; }
+      .score { display: flex; gap: 18px; font: 500 11px "DM Mono", monospace; text-transform: uppercase; }
+      .score strong { display: block; margin-top: 4px; color: var(--ink); font: 700 19px "Outfit", sans-serif; }
+      .score span { color: var(--muted); }
+      .prompt { min-height: 190px; display: grid; place-items: center; margin: 24px 0; border-radius: 6px; background: #edf3e8; }
+      .emoji { font-size: 92px; line-height: 1; filter: drop-shadow(0 7px 0 #173b3410); animation: pop 280ms ease-out both; }
+      fieldset { min-width: 0; margin: 0; padding: 0; border: 0; }
+      legend { margin-bottom: 12px; font-size: 14px; font-weight: 700; }
+      .choices { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; }
+      .choice { position: relative; }
+      .choice input { position: absolute; width: 1px; height: 1px; opacity: 0; }
+      .choice label {
+        min-height: 48px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 12px;
+        border: 1px solid var(--line);
+        border-radius: 5px;
+        background: #fff;
+        cursor: pointer;
+        font-size: 14px;
+        transition: border-color 130ms ease, background 130ms ease, transform 130ms ease;
+      }
+      .choice label:hover { border-color: #91a894; transform: translateY(-1px); }
+      .choice label::before { width: 15px; height: 15px; flex: 0 0 15px; border: 1px solid #aebcb0; border-radius: 50%; content: ""; }
+      .choice input:checked + label { border-color: var(--ink); background: #f0f6e6; }
+      .choice input:checked + label::before { border: 5px solid var(--ink); }
+      .choice input:focus-visible + label { outline: 3px solid #8caa65; outline-offset: 2px; }
+      .actions { display: flex; align-items: center; gap: 12px; margin-top: 18px; }
+      .submit {
+        min-height: 46px;
+        padding: 0 20px;
+        border: 1px solid var(--ink);
+        border-radius: 5px;
+        background: var(--green);
+        cursor: pointer;
+        font-weight: 700;
+        transition: transform 130ms ease, box-shadow 130ms ease;
+      }
+      .submit:hover { transform: translateY(-2px); box-shadow: 0 4px 0 var(--ink); }
+      .submit:disabled { cursor: wait; opacity: .65; }
+      .feedback { min-height: 22px; color: var(--muted); font-size: 14px; }
+      .feedback[data-result="correct"] { color: #267048; font-weight: 700; }
+      .feedback[data-result="wrong"], .feedback[data-result="error"] { color: #bb4e3d; font-weight: 600; }
+      aside { padding: 21px; border: 1px solid var(--line); border-radius: 8px; background: var(--white); animation: rise 500ms 130ms ease-out both; }
+      .board-title { display: flex; align-items: center; justify-content: space-between; padding-bottom: 15px; border-bottom: 1px solid var(--line); }
+      h2 { margin: 0; font-size: 17px; }
+      .board-title span { font-size: 20px; }
+      .leaderboard { display: grid; gap: 13px; margin: 16px 0 0; padding: 0; list-style: none; }
+      .leaderboard li { display: grid; grid-template-columns: 24px minmax(0, 1fr) auto; gap: 8px; align-items: center; font-size: 13px; }
+      .rank { color: var(--muted); font: 11px "DM Mono", monospace; }
+      .leader-name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+      .leader-score { font: 500 11px "DM Mono", monospace; }
+      .empty { margin: 18px 0 3px; color: var(--muted); font-size: 13px; line-height: 1.5; }
+      @keyframes rise { from { opacity: 0; transform: translateY(9px); } to { opacity: 1; transform: translateY(0); } }
+      @keyframes pop { from { opacity: 0; transform: scale(.72) rotate(-8deg); } to { opacity: 1; transform: scale(1) rotate(0); } }
+      @media (max-width: 700px) {
+        main { padding-top: 37px; }
+        .layout { grid-template-columns: 1fr; }
+        aside { order: 1; }
+        .game { padding: 19px; }
+        .leaderboard { grid-template-columns: 1fr 1fr; }
+        .tagline { display: none; }
+      }
+      @media (max-width: 400px) {
+        .shell { width: min(100% - 24px, 1040px); }
+        .choices { grid-template-columns: 1fr; }
+        .stats { align-items: flex-start; flex-direction: column; }
+        .leaderboard { grid-template-columns: 1fr; }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="shell">
+      <header>
+        <div class="brand"><span class="brand-mark" aria-hidden="true">✳</span> Emoji Pop Quiz</div>
+        <span class="tagline">A tiny test of your emoji instincts</span>
+      </header>
+      <main>
+        <section class="intro" aria-labelledby="page-title">
+          <div class="eyebrow">Quick round / big brain energy</div>
+          <h1 id="page-title">Name that <span>emoji.</span></h1>
+        </section>
+        <div class="layout">
+          <section class="game" aria-label="Emoji guessing game">
+            <div class="stats">
+              <label class="player-label" for="player-name">Playing as <input id="player-name" maxlength="18" autocomplete="nickname" placeholder="Your name"></label>
+              <div class="score" aria-live="polite">
+                <span>Score<strong id="score">0</strong></span>
+                <span>Played<strong id="played">0</strong></span>
+              </div>
+            </div>
+            <div class="prompt"><span class="emoji" id="emoji" role="img" aria-label="Emoji to guess">…</span></div>
+            <form id="guess-form">
+              <fieldset>
+                <legend>What does this emoji mean?</legend>
+                <div class="choices" id="choices"></div>
+              </fieldset>
+              <div class="actions">
+                <button class="submit" id="submit-button" type="submit">Lock it in <span aria-hidden="true">→</span></button>
+                <p class="feedback" id="feedback" role="status" aria-live="polite"></p>
+              </div>
+            </form>
+          </section>
+          <aside aria-labelledby="leaderboard-title">
+            <div class="board-title"><h2 id="leaderboard-title">Top players</h2><span aria-hidden="true">🏆</span></div>
+            <ol class="leaderboard" id="leaderboard" aria-live="polite"></ol>
+            <p class="empty" id="leaderboard-empty">Play a round to claim your spot.</p>
+          </aside>
+        </div>
+      </main>
+    </div>
+    <script>
+      const form = document.querySelector("#guess-form");
+      const choicesElement = document.querySelector("#choices");
+      const emojiElement = document.querySelector("#emoji");
+      const feedbackElement = document.querySelector("#feedback");
+      const submitButton = document.querySelector("#submit-button");
+      const playerNameInput = document.querySelector("#player-name");
+      const playerId = localStorage.getItem("emojiQuizPlayerId") || crypto.randomUUID();
+      let currentRound;
+      let answered = false;
+
+      localStorage.setItem("emojiQuizPlayerId", playerId);
+      playerNameInput.value = localStorage.getItem("emojiQuizPlayerName") || "";
+      playerNameInput.addEventListener("change", () => {
+        localStorage.setItem("emojiQuizPlayerName", playerNameInput.value.trim());
+      });
+
+      async function loadLeaderboard() {
+        const response = await fetch("/api/leaderboard");
+        const players = await response.json();
+        const leaderboard = document.querySelector("#leaderboard");
+        leaderboard.replaceChildren(...players.map((player, index) => {
+          const row = document.createElement("li");
+          const rank = document.createElement("span");
+          const name = document.createElement("span");
+          const score = document.createElement("span");
+          rank.className = "rank";
+          name.className = "leader-name";
+          score.className = "leader-score";
+          rank.textContent = String(index + 1).padStart(2, "0");
+          name.textContent = player.name;
+          score.textContent = player.score + " pts";
+          row.append(rank, name, score);
+          return row;
+        }));
+        document.querySelector("#leaderboard-empty").hidden = players.length > 0;
+      }
+
+      async function loadRound() {
+        submitButton.disabled = true;
+        submitButton.textContent = "Loading...";
+        try {
+          const response = await fetch("/api/round");
+          if (!response.ok) throw new Error("Could not load a round.");
+          currentRound = await response.json();
+          answered = false;
+          emojiElement.textContent = currentRound.emoji;
+          emojiElement.setAttribute("aria-label", "Emoji to guess");
+          choicesElement.replaceChildren(...currentRound.choices.map((choice, index) => {
+            const wrapper = document.createElement("div");
+            const input = document.createElement("input");
+            const label = document.createElement("label");
+            const id = "choice-" + index;
+            wrapper.className = "choice";
+            input.type = "radio";
+            input.name = "guess";
+            input.id = id;
+            input.value = choice;
+            input.required = true;
+            label.htmlFor = id;
+            label.textContent = choice;
+            wrapper.append(input, label);
+            return wrapper;
+          }));
+          feedbackElement.textContent = "";
+          feedbackElement.dataset.result = "";
+          submitButton.disabled = false;
+          submitButton.innerHTML = 'Lock it in <span aria-hidden="true">→</span>';
+        } catch (error) {
+          feedbackElement.textContent = error.message;
+          feedbackElement.dataset.result = "error";
+        }
+      }
+
+      form.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        if (answered) return loadRound();
+        const playerName = playerNameInput.value.trim();
+        if (!playerName) {
+          playerNameInput.focus();
+          feedbackElement.textContent = "Add your name before you play.";
+          feedbackElement.dataset.result = "error";
+          return;
+        }
+
+        submitButton.disabled = true;
+        feedbackElement.textContent = "Checking...";
+        try {
+          const response = await fetch("/api/guess", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              roundId: currentRound.roundId,
+              guess: new FormData(form).get("guess"),
+              playerId,
+              playerName,
+            }),
+          });
+          const result = await response.json();
+          if (!response.ok) throw new Error(result.error || "Your guess could not be checked.");
+          answered = true;
+          document.querySelector("#score").textContent = result.score;
+          document.querySelector("#played").textContent = result.played;
+          feedbackElement.dataset.result = result.correct ? "correct" : "wrong";
+          feedbackElement.textContent = result.correct
+            ? "Nailed it! It's " + result.answer + "."
+            : "Not quite. It's " + result.answer + ".";
+          submitButton.disabled = false;
+          submitButton.textContent = "Next emoji →";
+          await loadLeaderboard();
+        } catch (error) {
+          feedbackElement.textContent = error.message;
+          feedbackElement.dataset.result = "error";
+          submitButton.disabled = false;
+        }
+      });
+
+      loadRound();
+      loadLeaderboard();
+    </script>
+  </body>
+</html>

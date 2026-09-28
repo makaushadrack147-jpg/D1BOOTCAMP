@@ -1,0 +1,21 @@
+EXERCISE XP
+===========
+
+1. RESTful Blog API
+	blog-api/server.js
+	Run: cd blog-api && node server.js
+	Port: 3000
+	Routes: GET/POST /posts, GET/PUT/DELETE /posts/:id
+
+2. Books CRUD API
+	book-api/app.js
+	Run: cd book-api && node app.js
+	Port: 5000
+	Routes: GET/POST /api/books, GET /api/books/:bookId
+
+3. Express and Axios CRUD API
+	crud-api/app.js
+	crud-api/data/dataService.js
+	Run: cd crud-api && node app.js
+	Port: 5000
+	Route: GET /api/posts

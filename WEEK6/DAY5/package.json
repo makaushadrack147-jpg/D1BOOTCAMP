@@ -1,0 +1,13 @@
+{
+  "name": "week6-day5-emoji-quiz",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Express API and browser game for an emoji guessing quiz",
+  "main": "daily challenge .js",
+  "scripts": {
+    "start": "node \"daily challenge .js\""
+  },
+  "dependencies": {
+    "express": "^5.2.1"
+  }
+}
