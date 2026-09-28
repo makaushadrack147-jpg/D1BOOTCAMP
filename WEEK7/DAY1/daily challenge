@@ -1,0 +1,74 @@
+const { randomUUID } = require("node:crypto");
+
+module.exports = (express) => {
+	const router = express.Router();
+	const triviaQuestions = [
+		{ question: "What is the capital of France?", answer: "Paris" },
+		{ question: "Which planet is known as the Red Planet?", answer: "Mars" },
+		{ question: "What is the largest mammal in the world?", answer: "Blue whale" },
+	];
+	const quizzes = new Map();
+
+	router.get("/", (req, res) => {
+		const quizId = randomUUID();
+		quizzes.set(quizId, { questionIndex: 0, score: 0, finished: false });
+		res.json({
+			quizId,
+			questionNumber: 1,
+			totalQuestions: triviaQuestions.length,
+			question: triviaQuestions[0].question,
+		});
+	});
+
+	router.post("/", (req, res) => {
+		const { quizId, answer } = req.body || {};
+		if (typeof quizId !== "string" || typeof answer !== "string" || !answer.trim()) {
+			return res.status(400).json({ error: "quizId and a non-empty answer are required." });
+		}
+
+		const quiz = quizzes.get(quizId);
+		if (!quiz) return res.status(404).json({ error: "Quiz not found. Start a new quiz with GET /quiz." });
+		if (quiz.finished) return res.status(409).json({ error: "This quiz is already complete." });
+
+		const currentQuestion = triviaQuestions[quiz.questionIndex];
+		const isCorrect = answer.trim().toLowerCase() === currentQuestion.answer.toLowerCase();
+		if (isCorrect) quiz.score += 1;
+		quiz.questionIndex += 1;
+		const feedback = isCorrect ? "Correct!" : `Incorrect. The answer is ${currentQuestion.answer}.`;
+
+		if (quiz.questionIndex === triviaQuestions.length) {
+			quiz.finished = true;
+			return res.json({
+				feedback,
+				isCorrect,
+				completed: true,
+				score: quiz.score,
+				totalQuestions: triviaQuestions.length,
+				scoreUrl: `/quiz/score?quizId=${quizId}`,
+			});
+		}
+
+		res.json({
+			feedback,
+			isCorrect,
+			completed: false,
+			questionNumber: quiz.questionIndex + 1,
+			totalQuestions: triviaQuestions.length,
+			nextQuestion: triviaQuestions[quiz.questionIndex].question,
+		});
+	});
+
+	router.get("/score", (req, res) => {
+		const quiz = quizzes.get(req.query.quizId);
+		if (!quiz) return res.status(404).json({ error: "Quiz not found. Start a new quiz with GET /quiz." });
+		if (!quiz.finished) return res.status(409).json({ error: "Finish the quiz before viewing your final score." });
+
+		res.json({
+			score: quiz.score,
+			totalQuestions: triviaQuestions.length,
+			message: `You scored ${quiz.score} out of ${triviaQuestions.length}.`,
+		});
+	});
+
+	return router;
+};
