@@ -1,0 +1,42 @@
+EXERCISE XP
+===========
+
+1. Multiple exports with CommonJS
+	products.js
+	shop.js
+	Run: node shop.js
+
+2. Advanced modules with ES6 syntax
+	es6-app/data.js
+	es6-app/app.js
+	Run: node es6-app/app.js
+
+3. File management with CommonJS
+	file-management/fileManager.js
+	file-management/Hello World.txt
+	file-management/Bye World.txt
+	file-management/app.js
+	Run: node file-management/app.js
+
+4. Todo list with ES6 syntax
+	todoApp/todo.js
+	todoApp/app.js
+	Run: node todoApp/app.js
+
+5. Custom module with Lodash
+	math-app/math.js
+	math-app/app.js
+	Run: node math-app/app.js
+
+6. Chalk NPM package
+	npm-beginner/app.js
+	Run: node npm-beginner/app.js
+
+7. Reading and copying files
+	file-explorer/source.txt
+	file-explorer/copy-file.js
+	file-explorer/read-directory.js
+	Run:
+	  cd file-explorer
+	  node copy-file.js
+	  node read-directory.js

@@ -1,0 +1,25 @@
+DAILY CHALLENGE
+===============
+
+Run from this directory:
+  cd daily-challenge
+  node app.js
+
+1. Basic module system
+	daily-challenge/greeting.js
+	daily-challenge/app.js
+
+2. NPM module with Chalk
+	daily-challenge/colorful-message.js
+	daily-challenge/app.js
+
+3. File operations
+	daily-challenge/files/file-data.txt
+	daily-challenge/read-file.js
+	daily-challenge/app.js
+
+4. Integrated challenge
+	daily-challenge/challenge.js
+
+Run the complete challenge with:
+  node daily-challenge/challenge.js

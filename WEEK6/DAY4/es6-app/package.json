@@ -1,0 +1,5 @@
+{
+  "name": "es6-app",
+  "private": true,
+  "type": "module"
+}
