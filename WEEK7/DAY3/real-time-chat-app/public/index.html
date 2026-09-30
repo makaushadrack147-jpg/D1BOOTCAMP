@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f4f5f0">
+  <title>Commonroom | Chat</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/socket.io/socket.io.js" defer></script>
+  <script src="/client.js" defer></script>
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="/" aria-label="Commonroom home">
+        <span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></span>
+        <span>commonroom</span>
+      </a>
+      <div class="topbar-meta"><span class="live-dot"></span><span>Small rooms, good conversations</span></div>
+      <button class="text-button hidden" id="leave-button" type="button">Leave room</button>
+    </header>
+
+    <main>
+      <section class="welcome-view" id="welcome-view">
+        <div class="welcome-copy">
+          <p class="eyebrow"><span class="eyebrow-line"></span> YOUR PEOPLE, RIGHT NOW</p>
+          <h1>A little room<br>to <span>think out loud.</span></h1>
+          <p class="welcome-description">Drop into a room, find your people, and pick up the conversation as it happens.</p>
+          <form class="join-form" id="join-form">
+            <label for="username-input">Your name</label>
+            <input id="username-input" name="username" maxlength="24" minlength="2" placeholder="e.g. Alex Morgan" autocomplete="nickname" required>
+            <label for="room-select">Choose a room</label>
+            <select id="room-select" name="room">
+              <option value="commons">The commons</option>
+              <option value="studio">The studio</option>
+              <option value="afterhours">After hours</option>
+            </select>
+            <button class="primary-button" type="submit">Join the conversation <span aria-hidden="true">→</span></button>
+            <p class="form-note" id="join-error" role="alert"></p>
+          </form>
+        </div>
+        <aside class="welcome-note" aria-label="Conversation preview">
+          <div class="note-topline"><span>IN THE COMMONS</span><span class="note-signal"><i></i> LIVE</span></div>
+          <div class="note-message note-message-one"><span class="mini-avatar avatar-coral">M</span><div><b>Mina</b><p>Anyone found a good place to focus today?</p></div><time>now</time></div>
+          <div class="note-message note-message-two"><span class="mini-avatar avatar-blue">J</span><div><b>Jules</b><p>There’s a tiny bookshop cafe on 8th. Window seats, excellent tea.</p></div><time>1m</time></div>
+          <div class="note-message note-message-three"><span class="mini-avatar avatar-green">R</span><div><b>Rae</b><p>Adding that to my list.</p></div><time>now</time></div>
+          <div class="note-footer"><span class="stacked-avatars"><i>M</i><i>J</i><i>R</i><i>+</i></span><span>Good things happen in small rooms.</span></div>
+        </aside>
+      </section>
+
+      <section class="chat-view hidden" id="chat-view" aria-label="Chat room">
+        <aside class="room-sidebar">
+          <div class="sidebar-section">
+            <p class="sidebar-label">YOUR ROOMS</p>
+            <button class="room-link active" data-room="commons" type="button"><span class="room-hash">#</span><span>The commons</span><span class="room-count" data-room-count="commons">0</span></button>
+            <button class="room-link" data-room="studio" type="button"><span class="room-hash">#</span><span>The studio</span><span class="room-count" data-room-count="studio">0</span></button>
+            <button class="room-link" data-room="afterhours" type="button"><span class="room-hash">#</span><span>After hours</span><span class="room-count" data-room-count="afterhours">0</span></button>
+          </div>
+          <div class="sidebar-divider"></div>
+          <div class="people-section">
+            <div class="people-heading"><p class="sidebar-label">IN THIS ROOM</p><span id="people-count">0</span></div>
+            <ul class="people-list" id="people-list"></ul>
+          </div>
+          <div class="sidebar-profile"><span class="profile-avatar" id="profile-avatar">?</span><span class="profile-name" id="profile-name">Guest</span><span class="profile-status">online</span></div>
+        </aside>
+
+        <section class="conversation">
+          <header class="conversation-header">
+            <div><p class="conversation-kicker">ROOM / <span id="room-kicker">COMMONS</span></p><h2 id="room-title">The commons</h2></div>
+            <div class="room-presence"><span class="live-dot"></span><span id="room-presence">Connecting</span></div>
+          </header>
+          <div class="message-list" id="message-list" aria-live="polite" aria-relevant="additions"></div>
+          <div class="toast" id="message-toast" role="status"></div>
+          <form class="composer" id="message-form">
+            <label class="sr-only" for="message-input">Write a message</label>
+            <textarea id="message-input" rows="1" maxlength="1000" placeholder="Write something worth sharing…" required></textarea>
+            <div class="composer-bottom"><span>Enter to send <i></i> Shift + Enter for a new line</span><button class="send-button" type="submit">Send <span aria-hidden="true">↑</span></button></div>
+          </form>
+        </section>
+      </section>
+    </main>
+    <footer class="page-footer"><span>COMMONROOM <i>·</i> HERE, TOGETHER</span><span id="connection-label">READY WHEN YOU ARE</span></footer>
+  </div>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f2f4ef">
+  <title>Create Account | Fieldnotes</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/forms.js" defer></script>
+</head>
+<body>
+  <main class="auth-layout register-layout">
+    <section class="brand-panel">
+      <a class="brand" href="/login.html"><span class="brand-icon">F</span><span>fieldnotes</span></a>
+      <div class="brand-copy"><p class="eyebrow">A SPACE OF YOUR OWN</p><h1>Good ideas<br>start with<br><span>a blank page.</span></h1><p>Keep your thoughts close. Find them whenever you need them.</p></div>
+      <div class="brand-coordinate">37° 46' 49.1" N <span>·</span> 122° 25' 09.8" W</div>
+    </section>
+    <section class="form-panel">
+      <div class="form-top"><span>FIELDNOTES / ACCOUNT</span><span>01 — CREATE</span></div>
+      <div class="form-heading"><p class="eyebrow">JOIN THE NOTEBOOK</p><h2>Create your account</h2><p>Set up your details to get started.</p></div>
+      <form class="auth-form" id="register-form" data-endpoint="/register">
+        <div class="name-row"><div class="field"><label for="name">NAME</label><input id="name" name="name" autocomplete="given-name" placeholder="First name" required></div><div class="field"><label for="lastName">LAST NAME</label><input id="lastName" name="lastName" autocomplete="family-name" placeholder="Last name" required></div></div>
+        <div class="field"><label for="email">EMAIL</label><input id="email" name="email" type="email" autocomplete="email" placeholder="you@example.com" required></div>
+        <div class="field"><label for="username">USERNAME</label><input id="username" name="username" autocomplete="username" minlength="3" placeholder="Choose a username" required></div>
+        <div class="field"><label for="password">PASSWORD</label><input id="password" name="password" type="password" autocomplete="new-password" minlength="8" placeholder="At least 8 characters" required></div>
+        <button class="submit-button" type="submit" disabled><span>Create account</span><span aria-hidden="true">→</span></button>
+        <p class="form-message" id="form-message" role="status" aria-live="polite"></p>
+      </form>
+      <p class="form-switch">Already have an account? <a href="/login.html">Sign in</a></p>
+    </section>
+  </main>
+</body>
+</html>

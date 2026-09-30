@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#edf0e8">
+  <title>Outpost | Field Command</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/client.js" defer></script>
+</head>
+<body>
+  <div class="app-frame">
+    <header class="topbar">
+      <a class="brand" href="/" aria-label="Outpost home"><span class="brand-mark"><i></i><i></i><i></i></span><span>OUTPOST<span class="brand-period">.</span></span></a>
+      <div class="topbar-center"><span class="signal-dot"></span><span>FIELD NETWORK</span><span class="topbar-divider">/</span><span>TURN-BASED TACTICS</span></div>
+      <div class="account-strip hidden" id="account-strip"><span id="account-name"></span><button type="button" id="logout-button">LOG OUT</button></div>
+    </header>
+
+    <main>
+      <section class="auth-view" id="auth-view">
+        <div class="auth-intro">
+          <p class="overline"><span>TACTICAL SIMULATION</span><span class="overline-rule"></span><span>NO. 01</span></p>
+          <h1>Hold your ground.<br><span>Take the outpost.</span></h1>
+          <p class="intro-copy">Two commanders. One open field. Plan your route through the terrain and take the rival base.</p>
+          <div class="preview-board" aria-label="Illustration of a strategy game board">
+            <span class="preview-base preview-base-ember">A</span><span class="preview-obstacle o1"></span><span class="preview-obstacle o2"></span><span class="preview-obstacle o3"></span><span class="preview-obstacle o4"></span><span class="preview-unit">1</span><span class="preview-unit preview-unit-two">2</span><span class="preview-base preview-base-tide">B</span>
+            <span class="preview-grid-label label-n">NORTH</span><span class="preview-grid-label label-e">EAST</span>
+          </div>
+          <div class="rules-strip"><span><b>10 × 10</b> FIELD</span><span><b>4</b> DIRECTIONS</span><span><b>1</b> WIN CONDITION</span></div>
+        </div>
+        <section class="auth-panel" aria-labelledby="auth-title">
+          <div class="panel-heading"><div><p class="panel-kicker">COMMANDER ACCESS</p><h2 id="auth-title">Enter the field</h2></div><span class="panel-index">01 / 02</span></div>
+          <div class="auth-tabs" role="tablist" aria-label="Account access">
+            <button class="auth-tab active" type="button" data-auth-mode="login" role="tab" aria-selected="true">SIGN IN</button>
+            <button class="auth-tab" type="button" data-auth-mode="register" role="tab" aria-selected="false">CREATE ACCOUNT</button>
+          </div>
+          <form id="auth-form" class="auth-form">
+            <label for="username">CALLSIGN</label>
+            <input id="username" name="username" autocomplete="username" minlength="3" maxlength="20" placeholder="e.g. northstar" required>
+            <label for="password">PASSPHRASE</label>
+            <input id="password" name="password" type="password" autocomplete="current-password" minlength="8" placeholder="8 characters minimum" required>
+            <button class="button-primary" type="submit"><span id="auth-submit-label">SIGN IN</span><span aria-hidden="true">→</span></button>
+            <p class="form-error" id="auth-error" role="alert"></p>
+          </form>
+          <p class="secure-note"><span class="lock-mark">●</span> Your credentials stay off the game board.</p>
+        </section>
+      </section>
+
+      <section class="lobby-view hidden" id="lobby-view">
+        <div class="section-heading"><div><p class="overline"><span>OPERATIONS / LOBBY</span><span class="overline-rule"></span><span id="lobby-count">0 OPEN</span></p><h1>Choose your field.</h1></div><button class="button-primary create-game" id="create-game" type="button"><span>NEW MATCH</span><span aria-hidden="true">+</span></button></div>
+        <div class="lobby-columns"><div class="match-column"><div class="column-heading"><h2>Open matches</h2><button class="icon-button" id="refresh-games" type="button" title="Refresh matches" aria-label="Refresh matches">↻</button></div><div class="game-list" id="game-list"></div><p class="empty-state" id="empty-games">No open fields. Create a match and invite a rival.</p></div><aside class="briefing-panel"><p class="panel-kicker">FIELD BRIEFING</p><div class="briefing-map"><div class="brief-grid"></div><span class="brief-base base-one">A</span><span class="brief-base base-two">B</span><span class="brief-rock rock-one"></span><span class="brief-rock rock-two"></span></div><h3>Capture the rival's base.</h3><p>Take turns moving one square. Terrain blocks movement; reach the opposing base or attack it from an adjacent square.</p><div class="briefing-footer"><span>GRID <b>10 × 10</b></span><span>PLAYERS <b>02</b></span></div></aside></div>
+      </section>
+
+      <section class="game-view hidden" id="game-view">
+        <div class="game-header"><div><p class="overline"><span>ACTIVE FIELD</span><span class="overline-rule"></span><span id="game-code">MATCH --</span></p><h1 id="game-title">Waiting for a rival</h1></div><button class="text-button" id="back-lobby" type="button">← LOBBY</button></div>
+        <div class="game-layout"><section class="board-panel"><div class="board-meta"><span><i class="legend-dot ember-dot"></i> <span id="player-one-label">COMMANDER A</span></span><span class="board-coordinates">GRID 10 × 10 <i>·</i> SECTOR 01</span><span><i class="legend-dot tide-dot"></i> <span id="player-two-label">AWAITING RIVAL</span></span></div><div class="board-shell"><div class="axis-label axis-top"><span>A</span><span>B</span><span>C</span><span>D</span><span>E</span><span>F</span><span>G</span><span>H</span><span>I</span><span>J</span></div><div class="axis-label axis-left"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span></div><div class="game-board" id="game-board" role="grid" aria-label="10 by 10 strategy game board"></div></div><div class="board-footer"><span><i class="terrain-key"></i> BLOCKED TERRAIN</span><span>MOVE ONE SQUARE / ORTHOGONAL ONLY</span></div></section>
+          <aside class="game-sidebar"><div class="turn-card" id="turn-card"><span class="turn-marker"></span><p class="panel-kicker">CURRENT TURN</p><h2 id="turn-label">Waiting for player 2</h2><p id="turn-detail">Your opening position is set.</p></div><div class="action-panel"><p class="panel-kicker">ORDERS</p><p class="action-hint" id="action-hint">Select one adjacent square to move.</p><button class="attack-button" id="attack-button" type="button" disabled><span>ATTACK BASE</span><span aria-hidden="true">↗</span></button><p class="action-error" id="action-error" role="status"></p></div><div class="field-log"><div class="log-heading"><p class="panel-kicker">FIELD LOG</p><span id="turn-number">TURN 00</span></div><ol id="game-log"></ol></div><div class="match-players" id="match-players"></div></aside></div>
+      </section>
+    </main>
+    <footer class="footer-bar"><span>OUTPOST <i>·</i> FIELD COMMAND</span><span id="network-status">NETWORK READY</span><span>SIMULATION BUILD 01.04</span></footer>
+  </div>
+</body>
+</html>

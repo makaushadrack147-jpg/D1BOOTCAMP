@@ -1,0 +1,14 @@
+{
+  "name": "user-management-json-api",
+  "version": "1.0.0",
+  "description": "Bcrypt-backed Express user API with JSON file storage",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "type": "commonjs",
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "express": "^5.2.1"
+  }
+}

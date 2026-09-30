@@ -1,0 +1,14 @@
+{
+  "name": "notes-cli",
+  "version": "1.0.0",
+  "description": "A JSON-backed command-line notes app",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "type": "commonjs",
+  "dependencies": {
+    "lodash": "^4.17.21",
+    "yargs": "^17.7.2"
+  }
+}
