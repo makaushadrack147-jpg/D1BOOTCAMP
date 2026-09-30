@@ -1,0 +1,13 @@
+CREATE TABLE IF NOT EXISTS users (
+    id SERIAL PRIMARY KEY,
+    email TEXT UNIQUE,
+    username TEXT NOT NULL UNIQUE,
+    first_name TEXT,
+    last_name TEXT
+);
+
+CREATE TABLE IF NOT EXISTS hashpwd (
+    id SERIAL PRIMARY KEY,
+    username TEXT NOT NULL UNIQUE REFERENCES users(username) ON UPDATE CASCADE ON DELETE CASCADE,
+    password TEXT NOT NULL
+);
