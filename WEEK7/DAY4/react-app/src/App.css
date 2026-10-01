@@ -1,0 +1,164 @@
+.carousel-section {
+  padding: 24px 0 48px;
+  border-bottom: 1px solid #c7d2cc;
+}
+
+.carousel-section h1 {
+  margin: 8px 0 24px;
+  color: #183a31;
+  font: 700 38px/1.1 Georgia, 'Times New Roman', serif;
+}
+
+.destination-carousel {
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.destination-carousel .carousel .slide {
+  position: relative;
+  background: #183a31;
+  text-align: left;
+}
+
+.destination-carousel .carousel .slide img {
+  display: block;
+  width: 100%;
+  height: clamp(280px, 55vw, 520px);
+  object-fit: cover;
+}
+
+.destination-caption {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 48px 28px 24px;
+  color: white;
+  background: linear-gradient(transparent, rgb(0 0 0 / 72%));
+}
+
+.destination-caption h2 {
+  margin: 0;
+  font: 700 32px/1.2 Georgia, 'Times New Roman', serif;
+}
+
+.page-shell {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 42px 20px 80px;
+}
+
+.page-header {
+  padding: 24px 0 44px;
+  border-bottom: 1px solid #c7d2cc;
+}
+
+.page-header h1 {
+  margin: 8px 0 4px;
+  color: #183a31;
+  font: 700 48px/1.05 Georgia, 'Times New Roman', serif;
+}
+
+.eyebrow,
+.section-label {
+  color: #ad542c;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1.3px;
+}
+
+.header-note {
+  color: #52645d;
+}
+
+.exercise-section {
+  padding: 36px 0 42px;
+  border-bottom: 1px solid #c7d2cc;
+}
+
+.exercise-section h2 {
+  margin: 6px 0 22px;
+  color: #183a31;
+  font: 700 30px/1.15 Georgia, 'Times New Roman', serif;
+}
+
+.user-name {
+  display: flex;
+  gap: 32px;
+}
+
+.user-name h3 {
+  margin: 0;
+  color: #183a31;
+  font-size: 20px;
+}
+
+.animal-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 28px;
+  margin: 18px 0 0;
+  padding-left: 20px;
+}
+
+.demo-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 280px;
+  margin-top: 16px;
+}
+
+.demo-form input {
+  padding: 8px 10px;
+  border: 1px solid #c9d0cc;
+  border-radius: 6px;
+}
+
+.demo-form button {
+  max-width: 120px;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 6px;
+  background: #1d7a62;
+  color: white;
+  cursor: pointer;
+}
+
+.demo-image {
+  width: 100%;
+  max-width: 420px;
+  margin-top: 18px;
+  border-radius: 12px;
+}
+
+.demo-list {
+  margin-top: 16px;
+  padding-left: 22px;
+}
+
+@media (max-width: 640px) {
+  .carousel-section h1 {
+    font-size: 32px;
+  }
+
+  .destination-caption {
+    padding: 36px 18px 18px;
+  }
+
+  .destination-caption h2 {
+    font-size: 26px;
+  }
+
+  .page-shell {
+    padding-top: 24px;
+  }
+
+  .page-header h1 {
+    font-size: 38px;
+  }
+
+  .exercise-section h2 {
+    font-size: 26px;
+  }
+}
