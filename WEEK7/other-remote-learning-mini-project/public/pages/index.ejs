@@ -1,0 +1,14 @@
+<%- include('../partials/head', { title: 'Fact Feed | Home' }) %>
+<%- include('../partials/header') %>
+
+<main class="page-wrap">
+  <header class="page-title">
+    <p class="text-uppercase fw-bold mb-2" style="color: var(--highlight); font-family: Arial, sans-serif;">The Fact File RSS</p>
+    <h1>Interesting facts, freshly gathered.</h1>
+    <p class="mb-0">Recent posts from The Fact File, collected in one place.</p>
+  </header>
+
+  <%- include('../partials/posts', { posts, errorMessage }) %>
+</main>
+
+<%- include('../partials/footer') %>

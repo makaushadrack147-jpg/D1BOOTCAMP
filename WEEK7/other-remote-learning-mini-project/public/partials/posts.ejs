@@ -1,0 +1,21 @@
+<% if (errorMessage) { %>
+  <p class="notice" role="status"><%= errorMessage %></p>
+<% } else if (!posts || posts.length === 0) { %>
+  <p class="notice">No facts found. Try another title or category.</p>
+<% } else { %>
+  <div class="fact-list">
+    <% posts.forEach((post) => { %>
+      <article class="fact-post">
+        <h2>
+          <a href="<%= post.link %>" target="_blank" rel="noopener noreferrer"><%= post.title %></a>
+        </h2>
+        <div class="post-meta">
+          <span>Published: <%= post.publishedAt || 'Date unavailable' %></span>
+          <span>By: <%= post.creator %></span>
+          <span>Category: <%= post.categories.length ? post.categories.join(', ') : 'Uncategorized' %></span>
+        </div>
+        <p class="post-content"><%= post.content %></p>
+      </article>
+    <% }) %>
+  </div>
+<% } %>
