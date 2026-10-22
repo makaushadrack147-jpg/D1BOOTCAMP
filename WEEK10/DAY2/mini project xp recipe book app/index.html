@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="A cozy, personal home for the recipes you love to cook."
+    />
+    <meta name="theme-color" content="#f7f5ef" />
+    <title>Good Thyme — Your Recipe Book</title>
+  </head>
+  <body>
+    <div class="recipe-app">
+      <header class="topbar">
+        <a class="brand" href="#" aria-label="Good Thyme home">
+          <span class="brand-mark" aria-hidden="true">gt.</span>
+          <span>good thyme</span>
+        </a>
+        <span class="topbar-note">YOUR PERSONAL RECIPE BOOK</span>
+      </header>
+
+      <main>
+        <section class="hero" aria-labelledby="pageTitle">
+          <div class="hero-copy">
+            <p class="eyebrow"><span></span> A LITTLE MORE DELICIOUS</p>
+            <h1 id="pageTitle">Recipes worth<br /><em>remembering.</em></h1>
+            <p class="hero-description">
+              Keep the good ones close. Add the dishes you love and make every
+              meal feel like home.
+            </p>
+          </div>
+          <div class="hero-art" aria-hidden="true">
+            <span class="art-orbit orbit-one"></span>
+            <span class="art-orbit orbit-two"></span>
+            <span class="art-sun"></span>
+            <span class="art-leaf leaf-one"></span>
+            <span class="art-leaf leaf-two"></span>
+            <span class="art-leaf leaf-three"></span>
+            <span class="art-caption">made with<br />a little love</span>
+          </div>
+        </section>
+
+        <section class="workspace" aria-label="Recipe collection">
+          <aside class="form-panel">
+            <div class="panel-heading">
+              <span class="section-index">01 / YOUR KITCHEN</span>
+              <span class="tiny-spark" aria-hidden="true">✳</span>
+            </div>
+            <h2>Add a recipe</h2>
+            <p class="panel-description">A favorite from your table to ours.</p>
+
+            <form id="recipeEntryForm">
+              <label for="recipeTitle">Recipe name</label>
+              <input
+                type="text"
+                id="recipeTitle"
+                name="title"
+                placeholder="e.g. Sunday tomato pasta"
+                maxlength="100"
+                required
+              />
+
+              <label for="ingredients">Ingredients <span>one per line</span></label>
+              <textarea
+                id="ingredients"
+                name="ingredients"
+                placeholder="Ripe tomatoes&#10;A glug of olive oil&#10;A pinch of sea salt"
+                rows="5"
+                required
+              ></textarea>
+
+              <label for="instructions">How to make it</label>
+              <textarea
+                id="instructions"
+                name="instructions"
+                placeholder="Tell the story, step by step..."
+                rows="4"
+                required
+              ></textarea>
+
+              <button class="add-button" type="submit">
+                <span>Add to my recipes</span>
+                <span class="button-arrow" aria-hidden="true">↗</span>
+              </button>
+            </form>
+            <p class="privacy-note">
+              <span aria-hidden="true">✦</span> Saved just for you, on this
+              device.
+            </p>
+          </aside>
+
+          <section class="collection-panel" aria-labelledby="collectionTitle">
+            <div class="collection-header">
+              <div>
+                <span class="section-index">02 / THE COLLECTION</span>
+                <h2 id="collectionTitle">Your recipes<span class="title-dot">.</span></h2>
+              </div>
+              <div class="collection-tools">
+                <span id="recipeCount" class="recipe-count">0 RECIPES</span>
+                <button id="clearRecipesButton" class="clear-button" type="button">
+                  Clear all
+                </button>
+              </div>
+            </div>
+
+            <div class="filter-row" aria-label="Filter recipes">
+              <button class="filter-button is-active" type="button" data-filter="all">
+                All recipes
+              </button>
+              <button class="filter-button" type="button" data-filter="favorites">
+                <span aria-hidden="true">♡</span> Favorites
+              </button>
+            </div>
+
+            <div id="recipeContainer" class="recipe-grid" aria-live="polite"></div>
+            <p id="appMessage" class="app-message" role="status" aria-live="polite"></p>
+          </section>
+        </section>
+      </main>
+
+      <footer class="footer">
+        <span>GOOD THYME <span aria-hidden="true">✳</span></span>
+        <span>MADE FOR THE LOVE OF HOME COOKING</span>
+      </footer>
+    </div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
