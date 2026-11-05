@@ -1,0 +1,66 @@
+services:
+  - type: web
+    name: hustle-hub-api
+    runtime: node
+    rootDir: WEEK11/DAY1/final project/backend
+    region: singapore
+    plan: starter
+    buildCommand: npm ci
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: NODE_VERSION
+        value: "22"
+      - key: DATABASE_URL
+        fromDatabase:
+          name: hustle-hub-db
+          property: connectionString
+      - key: PGSSL
+        value: "false"
+      - key: ADMIN_EMAIL
+        sync: false
+      - key: ADMIN_PASSWORD
+        sync: false
+      - key: RESEND_API_KEY
+        sync: false
+      - key: EMAIL_FROM
+        sync: false
+      - key: FRONTEND_URL
+        value: https://hustle-hub-kenya.onrender.com
+      - key: MPESA_ENV
+        value: sandbox
+      - key: MPESA_CONSUMER_KEY
+        sync: false
+      - key: MPESA_CONSUMER_SECRET
+        sync: false
+      - key: MPESA_SHORTCODE
+        sync: false
+      - key: MPESA_PASSKEY
+        sync: false
+      - key: MPESA_TRANSACTION_TYPE
+        value: CustomerPayBillOnline
+      - key: CORS_ORIGINS
+        value: https://hustle-hub-kenya.onrender.com
+
+  - type: web
+    name: hustle-hub-kenya
+    runtime: static
+    rootDir: WEEK11/DAY1/final project/frontend
+    buildCommand: npm ci && npm run build
+    staticPublishPath: dist
+    routes:
+      - type: rewrite
+        source: /marketplace
+        destination: /marketplace.html
+    envVars:
+      - key: VITE_API_URL
+        value: https://hustle-hub-api.onrender.com
+
+databases:
+  - name: hustle-hub-db
+    region: singapore
+    plan: basic-256mb
+    databaseName: huble_hub
+    user: hustle_hub
