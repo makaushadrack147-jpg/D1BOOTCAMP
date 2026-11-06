@@ -31,18 +31,22 @@ export function readSessionToken(request) {
 }
 
 export function setSessionCookie(response, token) {
-  const secure = process.env.NODE_ENV === 'production' ? '; Secure' : ''
+  const isProduction = process.env.NODE_ENV === 'production'
+  const sameSite = isProduction ? 'None' : 'Strict'
+  const secure = isProduction ? '; Secure' : ''
   response.setHeader(
     'Set-Cookie',
-    `${sessionCookieName}=${token}; Path=/api; HttpOnly; SameSite=Strict; Max-Age=${sessionDurationSeconds}${secure}`,
+    `${sessionCookieName}=${token}; Path=/api; HttpOnly; SameSite=${sameSite}; Max-Age=${sessionDurationSeconds}${secure}`,
   )
 }
 
 export function clearSessionCookie(response) {
-  const secure = process.env.NODE_ENV === 'production' ? '; Secure' : ''
+  const isProduction = process.env.NODE_ENV === 'production'
+  const sameSite = isProduction ? 'None' : 'Strict'
+  const secure = isProduction ? '; Secure' : ''
   response.setHeader(
     'Set-Cookie',
-    `${sessionCookieName}=; Path=/api; HttpOnly; SameSite=Strict; Max-Age=0${secure}`,
+    `${sessionCookieName}=; Path=/api; HttpOnly; SameSite=${sameSite}; Max-Age=0${secure}`,
   )
 }
 
